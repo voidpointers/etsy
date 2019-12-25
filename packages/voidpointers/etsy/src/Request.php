@@ -90,6 +90,7 @@ class Request
         if ($file = $this->prepareFile($params)) {
             $params = [];
         }
+
         if ($this->tokenCredentials) {
             $headers = $this->server->getHeaders($this->tokenCredentials, $method, $url, $params);
             $options = [
@@ -108,6 +109,7 @@ class Request
                 $options['form_params'] = $params;
             }
         }
+        $options['proxy'] = 'http://127.0.0.1:1087';
 
         try {
             $response = $this->client->request($method, $url, $options);

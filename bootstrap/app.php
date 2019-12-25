@@ -28,6 +28,7 @@ $app->withFacades(true, [
 $app->withEloquent();
 
 $app->configure('etsy');
+$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,8 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Session\SessionServiceProvider::class);
 $app->register(\Voidpointers\Etsy\Provider\LumenServiceProvider::class);
+$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +108,7 @@ $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api/v1.php';
 });
 
 return $app;
