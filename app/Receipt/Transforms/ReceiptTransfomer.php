@@ -36,7 +36,7 @@ class ReceiptTransformer
 
         foreach ($data['transaction'] as $key => $transaction) {
             $inventory = $inventories[$transaction['etsy_sku']];
-            $attributes = $inventory->inventory->inventory_categorys_attributes_path;
+            $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? null;
             $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'];
             $data['transaction'][$key]['title'] = $attributes ?? implode('-', json_decode($attributes));
             $data['transaction'][$key]['attributes'] = $attributes ?? '';
