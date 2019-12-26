@@ -35,13 +35,18 @@ class ReceiptTransformer
         ->keyBy('listings_sku');
 
         foreach ($data['transaction'] as $key => $transaction) {
-            $inventory = $inventories[$transaction['etsy_sku']];
-            $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? '';
-            $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'];
+            $inventory = $inventories[$transaction['etsy_sku']] ?? [];
+
+            $attributes = '';
+            if (!empty($inventory)) {
+                $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? '';
+            }
+
+            $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'] ?? '';
+            $data['transaction'][$key]['attributes'] = $attributes;
             $data['transaction'][$key]['title'] = 1 < strlen($attributes)
                 ? implode('-', json_decode($attributes)) 
                 : $transaction['title'];
-            $data['transaction'][$key]['attributes'] = $attributes;
         }
 
         return $data;
