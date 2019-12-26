@@ -49,7 +49,7 @@ class ReceiptTransformer
                 : $transaction['title'];
         }
 
-        return $data;
+        return array_reverse($data);
     }
 
     protected function receipt($receipt)
