@@ -8,7 +8,7 @@ class ReceiptTransformer
 {
     public function transform($receipts)
     {
-        $receipts = array_reverse($receipts);
+        $receipts['results'] = array_reverse($receipts['results']);
 
         $data = [];
 
