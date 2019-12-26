@@ -2,6 +2,8 @@
 
 namespace Receipt\Transforms;
 
+use Listing\Entities\Sku;
+
 class ReceiptTransformer
 {
     public function transform($receipts)
@@ -19,6 +21,25 @@ class ReceiptTransformer
             foreach ($value as $val) {
                 $data['transaction'][] = $val;
             }
+        }
+
+        $sku = array_column($data['transaction'], 'etsy_sku');
+        $inventories = Sku::with(['inventory' => function ($query) {
+            return $query->select(
+                'sku',
+                'inventory_categorys_attributes_path'
+            );
+        }])
+        ->whereIn('listings_sku', $sku)
+        ->get()
+        ->keyBy('listings_sku');
+
+        foreach ($data['transaction'] as $key => $transaction) {
+            $inventory = $inventories[$transaction['etsy_sku']];
+            $attributes = $inventory->inventory->inventory_categorys_attributes_path;
+            $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'];
+            $data['transaction'][$key]['title'] = implode('-', json_decode($attributes));
+            $data['transaction'][$key]['attributes'] = $attributes;
         }
 
         return $data;

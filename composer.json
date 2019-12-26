@@ -29,7 +29,9 @@
             "App\\": "app/",
             "Api\\": "app/Api",
             "Receipt\\": "app/Receipt",
-            "Voidpointers\\Etsy\\": "packages/voidpointers/etsy/src"
+            "Voidpointers\\Etsy\\": "packages/voidpointers/etsy/src",
+            "Inventory\\": "app/Inventory",
+            "Listing\\": "app/Listing"
         },
         "files": [
             "bootstrap/helpers.php"
