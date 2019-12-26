@@ -44,19 +44,16 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        for ($i = 89; $i > 0; $i--) {
-            $this->pull($i);
-        }
+        $this->pull();
     }
 
-    protected function pull($page)
+    protected function pull($page = 1)
     {
-        dump($page);
         $receipts = \Etsy::findAllShopReceipts([
             'params' => [
                 'shop_id' => 16407439,
                 'page' => 89,
-                'limit' => 100,
+                'limit' => 10,
                 'was_paid' => true,
             ],
             'associations' => [
@@ -76,7 +73,7 @@ class ReceiptPull extends Command
         Consignee::insert($data['consignee']);
         Transaction::insert($data['transaction']);
 
-        echo "执行完毕" . PHP_EOL;
+        echo '第' . $page . "页执行完毕" . PHP_EOL;
         usleep(100);
     }
 }

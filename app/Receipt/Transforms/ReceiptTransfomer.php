@@ -112,7 +112,7 @@ class ReceiptTransformer
                 'transaction_id' => $value['transaction_id'],
                 'listing_id' => $value['listing_id'],
                 'etsy_sku' => $value['product_data']['sku'],
-                'image_id' => $value['MainImage']['listing_image_id'],
+                'image' => $value['MainImage']['url_75x75'],
                 'price' => $value['price'],
                 'quantity' => $value['quantity'],
                 'attributes' => '',
