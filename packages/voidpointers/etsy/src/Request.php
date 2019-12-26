@@ -109,7 +109,7 @@ class Request
                 $options['form_params'] = $params;
             }
         }
-        $options['proxy'] = 'http://127.0.0.1:1087';
+        $options['proxy'] = env('HTTP_PROXY');
 
         try {
             $response = $this->client->request($method, $url, $options);
