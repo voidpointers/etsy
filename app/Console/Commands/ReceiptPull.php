@@ -45,17 +45,17 @@ class ReceiptPull extends Command
     public function handle()
     {
         for ($i = 89; $i > 0; $i--) {
-            $this->pull($i);
+            $this->pull($i, 100);
         }
     }
 
-    protected function pull($page = 1)
+    protected function pull($page = 1, $limit = 10)
     {
         $receipts = \Etsy::findAllShopReceipts([
             'params' => [
                 'shop_id' => 16407439,
-                'page' => 89,
-                'limit' => 10,
+                'page' => $page,
+                'limit' => $limit,
                 'was_paid' => true,
             ],
             'associations' => [
