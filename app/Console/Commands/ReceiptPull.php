@@ -44,7 +44,9 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        $this->pull();
+        for ($i = 89; $i > 0; $i--) {
+            $this->pull($i);
+        }
     }
 
     protected function pull($page = 1)
