@@ -8,6 +8,8 @@ class ReceiptTransformer
 {
     public function transform($receipts)
     {
+        $receipts = array_reverse($receipts);
+
         $data = [];
 
         $transaction = [];
@@ -49,7 +51,7 @@ class ReceiptTransformer
                 : $transaction['title'];
         }
 
-        return array_reverse($data);
+        return $data;
     }
 
     protected function receipt($receipt)
