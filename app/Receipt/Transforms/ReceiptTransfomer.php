@@ -36,10 +36,10 @@ class ReceiptTransformer
 
         foreach ($data['transaction'] as $key => $transaction) {
             $inventory = $inventories[$transaction['etsy_sku']];
-            $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? null;
+            $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? '';
             $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'];
-            $data['transaction'][$key]['title'] = $attributes ?? implode('-', json_decode($attributes));
-            $data['transaction'][$key]['attributes'] = $attributes ?? '';
+            $data['transaction'][$key]['title'] = 1 < strlen($attributes) ? implode('-', json_decode($attributes)) : '';
+            $data['transaction'][$key]['attributes'] = $attributes;
         }
 
         return $data;
