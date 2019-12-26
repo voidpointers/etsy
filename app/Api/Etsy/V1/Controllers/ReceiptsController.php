@@ -3,6 +3,7 @@
 namespace Api\Etsy\V1\Controllers;
 
 use Api\Controller;
+use Dingo\Api\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Receipt\Entities\Consignee;
 use Receipt\Entities\Transaction;
@@ -45,13 +46,13 @@ class ReceiptsController extends Controller
      * 
      * @return
      */
-    public function pull()
+    public function pull(Request $request)
     {
         $receipts = \Etsy::findAllShopReceipts([
             'params' => [
                 'shop_id' => 16407439,
-                'page' => 1,
-                'limit' => 5,
+                'page' => $request->get('page', 1),
+                'limit' => $request->get('limit', 10),
                 'was_paid' => true,
             ],
             'associations' => [
