@@ -38,7 +38,7 @@ class ReceiptTransformer
             $inventory = $inventories[$transaction['etsy_sku']];
             $attributes = $inventory->inventory->inventory_categorys_attributes_path ?? '';
             $data['transaction'][$key]['local_sku'] = $inventory['inventory_sku'];
-            $data['transaction'][$key]['title'] = implode('-', json_decode($attributes));
+            $data['transaction'][$key]['title'] = implode('-', json_decode($attributes)) ?? '';
             $data['transaction'][$key]['attributes'] = $attributes;
         }
 
