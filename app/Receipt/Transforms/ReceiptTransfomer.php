@@ -75,6 +75,7 @@ class ReceiptTransformer
             'total_shipping_cost' => $receipt['total_shipping_cost'],
             'seller_msg' => $receipt['message_from_seller'] ?? '',
             'buyer_msg' => $receipt['message_from_buyer'] ?? '',
+            'buyer_msg_zh' => $receipt['message_from_buyer'] ?? '',
             'creation_tsz' => $receipt['creation_tsz'] ?? 0,
             'modified_tsz' => $receipt['last_modified_tsz'] ?? 0,
             'create_time' => time(),
