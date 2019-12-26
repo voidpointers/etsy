@@ -66,11 +66,11 @@ class ReceiptsController extends Controller
         // 数据转换
         $data = $this->receiptTransformer->transform($receipts);
 
-        get_last_sql();
-
         // 入库
         Receipt::insert($data['receipt']);
         Consignee::insert($data['consignee']);
         Transaction::insert($data['transaction']);
+
+        return ['msg' => 'success'];
     }
 }
