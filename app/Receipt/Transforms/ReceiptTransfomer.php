@@ -98,7 +98,7 @@ class ReceiptTransformer
         $data = [];
         foreach ($receipt['Transactions'] as $value) {
             $data[] = [
-                'title' => $value['product_data']['title'],
+                'title' => $value['title'],
                 'etsy_receipt_id' => $receipt['receipt_id'],
                 'receipt_sn' => $receipt['receipt_sn'],
                 'transaction_id' => $value['transaction_id'],
