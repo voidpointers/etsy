@@ -20,7 +20,6 @@ class TransactionTransformer implements TransformerInterface
                 'image' => $value['MainImage']['url_75x75'],
                 'price' => $value['price'],
                 'quantity' => $value['quantity'],
-                'attributes' => [],
                 'variations' => json_encode(array_map(function ($variations) {
                     return [
                         'name' => $variations['formatted_name'],
