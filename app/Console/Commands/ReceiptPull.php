@@ -47,7 +47,7 @@ class ReceiptPull extends Command
     {
         for ($i = 90; $i > 0; $i--)
         {
-            $this->pull($i, 100);
+            $this->pull(['page' => $i, 'limit' => 100]);
         }
     }
 
