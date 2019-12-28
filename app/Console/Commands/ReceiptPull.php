@@ -45,13 +45,16 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        $this->pull(1, 5);
+        for ($i = 90; $i > 0; $i--)
+        {
+            $this->pull($i, 100);
+        }
     }
 
-    protected function pull($page = 1, $limit = 10)
+    protected function pull($params)
     {
         // 数据转换
-        $data = $this->receiptService->lists(['limit' => 1]);
+        $data = $this->receiptService->lists($params);
         if (empty($data)) {
             echo "订单列表为空" . PHP_EOL;
             return;

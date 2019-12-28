@@ -28,7 +28,6 @@ class ReceiptRequest
                 ]
             ]
         ]);
-        dd($receipts);
 
         return $receipts;
     }
