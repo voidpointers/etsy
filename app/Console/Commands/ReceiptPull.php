@@ -67,8 +67,7 @@ class ReceiptPull extends Command
             Transaction::insert($data['transaction']);
         } catch (\Exception $e) {
             get_last_sql();
-            dump($e->getMessage());
-            dd($data['transaction']);
+            dd($e->getMessage());
             exit();
         }
 
