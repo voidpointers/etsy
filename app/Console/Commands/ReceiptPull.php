@@ -60,10 +60,14 @@ class ReceiptPull extends Command
             return;
         }
 
-        // 入库
-        Receipt::insert($data['receipt']);
-        Consignee::insert($data['consignee']);
-        Transaction::insert($data['transaction']);
+        try {
+            // 入库
+            Receipt::insert($data['receipt']);
+            Consignee::insert($data['consignee']);
+            Transaction::insert($data['transaction']);
+        } catch (\Exception $e) {
+            dd($data);
+        }
 
         echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
         usleep(100);
