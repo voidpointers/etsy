@@ -8,10 +8,5 @@ $api->version('v1', [], function ($api) {
         'prefix' => 'receipts',
     ], function ($api) {
         $api->get('pull', 'ReceiptsController@pull');
-        $api->group([
-            'middleware' => 'api.auth'
-        ], function ($api) {
-            $api->get('info', 'UsersController@info');
-        });
     });
 });

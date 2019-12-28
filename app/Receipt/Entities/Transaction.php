@@ -8,6 +8,11 @@ class Transaction extends Model
 {
     protected $table = 'receipt_transactions';
 
+    protected $casts = [
+        'attributes' => 'array',
+        'variations' => 'array'
+    ];
+
     /**
      * Get the transaction's title.
      *

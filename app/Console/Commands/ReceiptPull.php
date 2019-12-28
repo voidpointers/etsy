@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Receipt\Entities\Consignee;
 use Receipt\Entities\Transaction;
 use Receipt\Entties\Receipt;
+use Receipt\Services\ReceiptService;
 use Receipt\Transforms\ReceiptTransformer;
 
 class ReceiptPull extends Command
@@ -24,16 +25,16 @@ class ReceiptPull extends Command
      */
     protected $description = '拉取订单';
 
-    protected $receiptTransformer;
+    protected $receiptService;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(ReceiptTransformer $receiptTransformer)
+    public function __construct(ReceiptService $receiptService) 
     {
-        $this->receiptTransformer = $receiptTransformer;
+        $this->receiptService = $receiptService;
         parent::__construct();
     }
 
@@ -44,31 +45,17 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        for ($i = 89; $i > 0; $i--) {
-            $this->pull($i, 100);
-        }
+        $this->pull(1, 5);
     }
 
     protected function pull($page = 1, $limit = 10)
     {
-        $receipts = \Etsy::findAllShopReceipts([
-            'params' => [
-                'shop_id' => 16407439,
-                'page' => $page,
-                'limit' => $limit,
-                'was_paid' => true,
-            ],
-            'associations' => [
-                'Transactions' => [
-                    'associations' => [
-                        'MainImage'
-                    ]
-                ]
-            ]
-        ]);
-
         // 数据转换
-        $data = $this->receiptTransformer->transform($receipts);
+        $data = $this->receiptService->lists(['limit' => 1]);
+        if (empty($data)) {
+            echo "订单列表为空" . PHP_EOL;
+            return;
+        }
 
         // 入库
         Receipt::insert($data['receipt']);
