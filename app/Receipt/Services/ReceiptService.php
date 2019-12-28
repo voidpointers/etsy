@@ -113,7 +113,9 @@ class ReceiptService
             }
 
             $data[$key]['local_sku'] = $inventory['inventory_sku'] ?? '';
-            $data[$key]['attributes'] = $attributes;
+            if (1 < strlen($attributes)) {
+                $data[$key]['attributes'] = $attributes;
+            }
             $data[$key]['title'] = 1 < strlen($attributes)
                 ? implode('-', json_decode($attributes)) 
                 : $transaction['title'];
