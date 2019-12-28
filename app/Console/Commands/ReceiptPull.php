@@ -45,7 +45,7 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        for ($i = 90; $i > 0; $i--)
+        for ($i = 91; $i > 0; $i--)
         {
             $this->pull(['page' => $i, 'limit' => 100]);
         }
@@ -65,7 +65,7 @@ class ReceiptPull extends Command
         Consignee::insert($data['consignee']);
         Transaction::insert($data['transaction']);
 
-        echo '第' . $page . "页执行完毕" . PHP_EOL;
+        echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
         usleep(100);
     }
 }
