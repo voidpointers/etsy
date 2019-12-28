@@ -66,7 +66,8 @@ class ReceiptPull extends Command
             Consignee::insert($data['consignee']);
             Transaction::insert($data['transaction']);
         } catch (\Exception $e) {
-            dd($data);
+            dd($data['transaction']);
+            exit();
         }
 
         echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
