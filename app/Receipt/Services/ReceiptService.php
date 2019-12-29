@@ -69,6 +69,12 @@ class ReceiptService
      */
     protected function transform($receipts)
     {
+        // 为每组数据添加唯一编号
+        $receipts = array_map(function ($receipt) {
+            $receipt['receipt_sn'] = generate_unique_id();
+            return $receipt;
+        }, $receipts);
+
         $transformer = new Transformer();
 
         $data = [];
@@ -77,7 +83,6 @@ class ReceiptService
             $instance = $transformer::instance($value);
 
             $data[$value] = array_map(function ($receipt) use ($instance) {
-                $receipt['receipt_sn'] = generate_unique_id();
                 return $instance->transform($receipt);
             }, $receipts);
         }
