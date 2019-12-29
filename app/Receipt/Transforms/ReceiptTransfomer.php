@@ -17,6 +17,7 @@ class ReceiptTransformer implements TransformerInterface
             'buyer_user_id' => $receipt['buyer_user_id'],
             'buyer_email' => $receipt['buyer_email'],
             'payment_method' => $receipt['payment_method'],
+            'status' => $receipt['was_shipped'] ? 8 : 1,
             'was_paid' => $receipt['was_paid'],
             'was_shipped' => $receipt['was_shipped'],
             'currency_code' => $receipt['currency_code'],
@@ -34,6 +35,7 @@ class ReceiptTransformer implements TransformerInterface
             'modified_tsz' => $receipt['last_modified_tsz'] ?? 0,
             'create_time' => time(),
             'update_time' => time(),
+            'complete_time' => $receipt['was_shipped'] ?? $receipt['last_modified_tsz'],
         ];
     }
 }
