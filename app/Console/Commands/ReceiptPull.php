@@ -50,7 +50,7 @@ class ReceiptPull extends Command
         //     $this->pull(['page' => $i, 'limit' => 100]);
         // }
         // 获取一小时内订单
-        $cur = time();
+        $cur = mktime(date("H"), 0, 0);
 
         $this->pull(['min_created' => $cur - 3600, 'max_created' => $cur]);
     }
