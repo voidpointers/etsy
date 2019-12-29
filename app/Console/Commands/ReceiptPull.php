@@ -45,10 +45,14 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        for ($i = 91; $i > 0; $i--)
-        {
-            $this->pull(['page' => $i, 'limit' => 100]);
-        }
+        // for ($i = 91; $i > 0; $i--)
+        // {
+        //     $this->pull(['page' => $i, 'limit' => 100]);
+        // }
+        // 获取一小时内订单
+        $cur = mktime(date("H") - 1);
+
+        $this->pull(['min_created' => $cur, 'max_created' => $cur + 3600]);
     }
 
     protected function pull($params)
@@ -65,7 +69,8 @@ class ReceiptPull extends Command
         Consignee::insert($data['consignee']);
         Transaction::insert($data['transaction']);
 
-        echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
+        // echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
+        echo $params['min_created'] . '-' . $params['max_created'] . " 执行完毕" . PHP_EOL;
         usleep(100);
     }
 }
