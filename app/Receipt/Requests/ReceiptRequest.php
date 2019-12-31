@@ -11,26 +11,26 @@ class ReceiptRequest
      */
     public function getReceiptByShop(array $params = [])
     {
-        $filter = [];
-        $filter['params'] = [
-            'shop_id' => 16407439,
-            'was_paid' => true,
-            'limit' => $params['limit'] ?? 100
+        $filter = [
+            'shop_id' => 16407439, 'was_paid' => true, 'limit' => $params['limit'] ?? 100
         ];
 
         if (isset($params['min_created'])) {
-            $filter['params']['min_created'] = $params['min_created'] ?? '';
-            $filter['params']['max_created'] = $params['max_created'] ?? '';
+            $filter['min_created'] = $params['min_created'] ?? '';
+            $filter['max_created'] = $params['max_created'] ?? '';
         }
         if (isset($params['page'])) {
-            $filter['params']['page'] = $params['page'];
+            $filter['page'] = $params['page'];
         }
 
-        $filter['associations'] = [
+        $associations = [
             'Transactions' => ['associations' => ['MainImage']]
         ];
 
-        $receipts = \Etsy::findAllShopReceipts($filter);
+        $receipts = \Etsy::findAllShopReceipts([
+            'params' => $filter,
+            'associations' => $associations
+        ]);
 
         return $receipts;
     }
