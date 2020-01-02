@@ -25,7 +25,12 @@ class TrackingsController extends Controller
      */
     public function create(Request $request)
     {
-        $result = $this->trackingRequest->submit($request->all());
+        $result = [];
+
+        $receipt_ids = $request->input('receipt_id', []);
+        foreach ($receipt_ids as $id) {
+            $result[] = $this->trackingRequest->submit();
+        }
 
         return $result;
     }

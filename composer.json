@@ -31,7 +31,8 @@
             "Receipt\\": "app/Receipt",
             "Voidpointers\\Etsy\\": "packages/voidpointers/etsy/src",
             "Inventory\\": "app/Inventory",
-            "Listing\\": "app/Listing"
+            "Listing\\": "app/Listing",
+            "System\\": "app/System"
         },
         "files": [
             "bootstrap/helpers.php"
