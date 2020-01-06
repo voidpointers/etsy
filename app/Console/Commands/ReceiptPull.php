@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Receipt\Entities\Consignee;
 use Receipt\Entities\Transaction;
 use Receipt\Entties\Receipt;
-use Receipt\Entties\Shipment;
 use Receipt\Services\ReceiptService;
 use Receipt\Transforms\ReceiptTransformer;
 
@@ -69,7 +68,6 @@ class ReceiptPull extends Command
         Receipt::insert($data['receipt']);
         Consignee::insert($data['consignee']);
         Transaction::insert($data['transaction']);
-        Shipment::insert($data['shipment']);
 
         // echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
         echo $params['min_created'] . '-' . $params['max_created'] . " 执行完毕" . PHP_EOL;
