@@ -27,9 +27,12 @@ class TrackingsController extends Controller
     {
         $result = [];
 
-        $receipt_ids = $request->input('receipt_id', []);
-        foreach ($receipt_ids as $id) {
-            $result[] = $this->trackingRequest->submit();
+        foreach ($request->all() as $value) {
+            $result[] = $this->trackingRequest->submit([
+                'receipt_id' => $value['receipt_id'],
+                'shop_id' => $value['shop_id'],
+                'tracking_code' => $value['tracking_code'],
+            ]);
         }
 
         return $result;

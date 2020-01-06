@@ -18,8 +18,6 @@ class ReceiptTransformer implements TransformerInterface
             'buyer_email' => $receipt['buyer_email'],
             'payment_method' => $receipt['payment_method'],
             'status' => $receipt['was_shipped'] ? 8 : 1,
-            'was_paid' => $receipt['was_paid'],
-            'was_shipped' => $receipt['was_shipped'],
             'currency_code' => $receipt['currency_code'],
             'total_price' => $receipt['total_price'],
             'subtotal' => $receipt['subtotal'],
