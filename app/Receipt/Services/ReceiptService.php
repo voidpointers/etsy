@@ -79,7 +79,7 @@ class ReceiptService
 
         $data = [];
         // 注入转换器
-        foreach (['receipt', 'consignee', 'transaction', 'shipment'] as $value) {
+        foreach (['receipt', 'consignee', 'transaction'] as $value) {
             $instance = $transformer::instance($value);
 
             $data[$value] = array_map(function ($receipt) use ($instance) {
