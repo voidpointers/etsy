@@ -11,7 +11,7 @@ class ReceiptTransformer implements TransformerInterface
         return [
             'shop_id' => 16407439,
             'receipt_id' => $receipt['receipt_id'],
-            'receipt_sn' => $receipt['receipt_sn'] ?? '',
+            'receipt_sn' => $receipt['receipt_sn'] ?? 0,
             'type' => 1,
             'order_id' => $receipt['order_id'],
             'seller_user_id' => $receipt['seller_user_id'],
@@ -31,7 +31,7 @@ class ReceiptTransformer implements TransformerInterface
             'buyer_msg' => $receipt['message_from_buyer'] ?? '',
             'buyer_msg_zh' => '',
             'logistics_speed' => 1,
-            'package_sn' => $receipt['package_sn'] ?? '',
+            'package_sn' => $receipt['package_sn'] ?? 0,
             'creation_tsz' => $receipt['creation_tsz'] ?? 0,
             'modified_tsz' => $receipt['last_modified_tsz'] ?? 0,
             'create_time' => time(),

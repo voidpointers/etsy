@@ -82,7 +82,7 @@ class ReceiptPull extends Command
         // $this->packageService->create($data);
 
         // echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
-        echo $params['min_created'] . '-' . $params['max_created'] . " 执行完毕" . PHP_EOL;
+        echo json_encode($params) . " 执行完毕" . PHP_EOL;
         usleep(100);
     }
 }
