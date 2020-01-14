@@ -6,6 +6,8 @@ use Listing\Entities\Sku;
 use Receipt\Entties\Receipt;
 use Receipt\Requests\ReceiptRequest;
 use Receipt\Transforms\Transformer;
+use Receipt\Entities\Consignee;
+use Receipt\Entities\Transaction;
 
 class ReceiptService
 {
@@ -16,6 +18,13 @@ class ReceiptService
     public function __construct(ReceiptRequest $receiptRequest)
     {
         $this->receiptRequest = $receiptRequest;
+    }
+
+    public function create($params)
+    {
+        Receipt::insert($params['receipt']);
+        Consignee::insert($params['consignee']);
+        Transaction::insert($params['transaction']);
     }
 
     /**
@@ -47,8 +56,8 @@ class ReceiptService
 
         $receipt_ids = array_keys($receipts);
         // 筛选已入库数据
-        $tmp = Receipt::whereIn('etsy_receipt_id', $receipt_ids)->pluck(
-            'etsy_receipt_id'
+        $tmp = Receipt::whereIn('receipt_id', $receipt_ids)->pluck(
+            'receipt_id'
         )->toArray();
 
         foreach ($receipt_ids as $id) {
@@ -72,6 +81,7 @@ class ReceiptService
         // 为每组数据添加唯一编号
         $receipts = array_map(function ($receipt) {
             $receipt['receipt_sn'] = generate_unique_id();
+            // $receipt['package_sn'] = generate_package_sn();
             return $receipt;
         }, $receipts);
 

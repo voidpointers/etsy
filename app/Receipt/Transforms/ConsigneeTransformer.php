@@ -9,7 +9,7 @@ class ConsigneeTransformer implements TransformerInterface
     public function transform($receipt)
     {
         return [
-            'etsy_receipt_id' => $receipt['receipt_id'],
+            'receipt_id' => $receipt['receipt_id'],
             'receipt_sn' => $receipt['receipt_sn'],
             'country_id' => $receipt['country_id'],
             'name' => $receipt['name'] ?? '',

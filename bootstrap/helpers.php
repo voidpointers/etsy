@@ -42,3 +42,14 @@ if (!function_exists('generate_unique_id')) {
         return Redis::incr($key);
     }
 }
+
+if (!function_exists('generate_package_sn')) {
+    /**
+     * 生成包裹编号
+     */
+    function generate_package_sn()
+    {
+        $seed = generate_unique_id(1000000, 'package-primary-key');
+        return mt_rand(10, 99) . $seed . mt_rand(0, 9);
+    }
+}

@@ -3,9 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Receipt\Entities\Consignee;
-use Receipt\Entities\Transaction;
-use Receipt\Entties\Receipt;
+use Package\Services\PackageService;
 use Receipt\Services\ReceiptService;
 use Receipt\Transforms\ReceiptTransformer;
 
@@ -16,7 +14,7 @@ class ReceiptPull extends Command
      *
      * @var string
      */
-    protected $signature = 'receipt:pull';
+    protected $signature = 'receipt:pull {method} {--page=} {--limit=}';
 
     /**
      * The console command description.
@@ -27,14 +25,19 @@ class ReceiptPull extends Command
 
     protected $receiptService;
 
+    protected $packageService;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(ReceiptService $receiptService) 
+    public function __construct(
+        ReceiptService $receiptService,
+        PackageService $packageService)
     {
         $this->receiptService = $receiptService;
+        $this->packageService = $packageService;
         parent::__construct();
     }
 
@@ -45,14 +48,22 @@ class ReceiptPull extends Command
      */
     public function handle()
     {
-        // for ($i = 91; $i > 0; $i--)
-        // {
-        //     $this->pull(['page' => $i, 'limit' => 100]);
-        // }
-        // 获取一小时内订单
-        $cur = mktime(date("H"), 0, 0);
+        $method = $this->argument('method');
+        $page = $this->option('page') ?? 1;
+        $limit = $this->option('limit') ?? 5;
 
-        $this->pull(['min_created' => $cur - 3600, 'max_created' => $cur]);
+        if ('page' == $method) {
+            for ($i = $page; $i > 0; $i--) {
+                $this->pull(['page' => $i, 'limit' => $limit]);
+            }
+        } else {
+            // 获取一小时内订单
+            $cur = mktime(date("H"), 0, 0);
+            $this->pull([
+                'min_created' => $cur - 3600,
+                'max_created' => $cur
+            ]);
+        }
     }
 
     protected function pull($params)
@@ -65,9 +76,10 @@ class ReceiptPull extends Command
         }
 
         // 入库
-        Receipt::insert($data['receipt']);
-        Consignee::insert($data['consignee']);
-        Transaction::insert($data['transaction']);
+        $this->receiptService->create($data);
+
+        // 自动打包
+        // $this->packageService->create($data);
 
         // echo '第' . $params['page'] . "页执行完毕" . PHP_EOL;
         echo $params['min_created'] . '-' . $params['max_created'] . " 执行完毕" . PHP_EOL;

@@ -26,21 +26,21 @@ $router->get('/etsy', function () use ($router) {
             'Images',
             // Or a composed one with (all are optional as Etsy API says) "scope", "limit", "offset", "select" and sub-associations ("associations")
             // ?includes=ShippingInfo(currency_code, primary_cost):active:1:0/DestinationCountry(name,slug)
-            'ShippingInfo' => array(
-                'scope' => 'active',
-                'limit' => 1,
-                'offset' => 0,
-                'select' => array('currency_code', 'primary_cost'),
-                // The only issue here is that sub-associations couldn't be more than one, I guess.
-                'associations' => array(
-                    'DestinationCountry' => array(
-                        'select' => array('name', 'slug')
-                    )
-                )
-            )
+            // 'ShippingInfo' => array(
+            //     'scope' => 'active',
+            //     'limit' => 1,
+            //     'offset' => 0,
+            //     'select' => array('currency_code', 'primary_cost'),
+            //     // The only issue here is that sub-associations couldn't be more than one, I guess.
+            //     'associations' => array(
+            //         'DestinationCountry' => array(
+            //             'select' => array('name', 'slug')
+            //         )
+            //     )
+            // )
         )
     );
-    $result = Etsy::getListing($args);
-    var_dump($result);
+    $result = Etsy::findAllListingActive($args);
+    return $result;
 });
 

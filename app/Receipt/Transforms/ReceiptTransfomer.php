@@ -9,9 +9,10 @@ class ReceiptTransformer implements TransformerInterface
     public function transform($receipt)
     {
         return [
-            'etsy_receipt_id' => $receipt['receipt_id'],
+            'shop_id' => 16407439,
+            'receipt_id' => $receipt['receipt_id'],
             'receipt_sn' => $receipt['receipt_sn'] ?? '',
-            'type' => $receipt['receipt_type'],
+            'type' => 1,
             'order_id' => $receipt['order_id'],
             'seller_user_id' => $receipt['seller_user_id'],
             'buyer_user_id' => $receipt['buyer_user_id'],
@@ -29,11 +30,13 @@ class ReceiptTransformer implements TransformerInterface
             'seller_msg' => $receipt['message_from_seller'] ?? '',
             'buyer_msg' => $receipt['message_from_buyer'] ?? '',
             'buyer_msg_zh' => '',
+            'logistics_speed' => 1,
+            'package_sn' => $receipt['package_sn'] ?? '',
             'creation_tsz' => $receipt['creation_tsz'] ?? 0,
             'modified_tsz' => $receipt['last_modified_tsz'] ?? 0,
             'create_time' => time(),
             'update_time' => time(),
-            'complete_time' => $receipt['was_shipped'] ?? $receipt['last_modified_tsz'],
+            'complete_time' => $receipt['was_shipped'] ? $receipt['last_modified_tsz'] : 0,
         ];
     }
 }

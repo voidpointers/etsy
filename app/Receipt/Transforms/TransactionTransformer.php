@@ -12,7 +12,7 @@ class TransactionTransformer implements TransformerInterface
         foreach ($receipts['Transactions'] as $value) {
             $data[] = [
                 'title' => $value['title'],
-                'etsy_receipt_id' => $receipts['receipt_id'],
+                'receipt_id' => $receipts['receipt_id'],
                 'receipt_sn' => $receipts['receipt_sn'],
                 'transaction_id' => $value['transaction_id'],
                 'listing_id' => $value['listing_id'],
