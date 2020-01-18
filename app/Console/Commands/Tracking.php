@@ -37,7 +37,7 @@ class Tracking extends Command
 
         // 发送
         foreach ($logistics as $value) {
-            $tracking = $this->receiptRequest->submitTracking($value);
+            $tracking = $this->receiptRequest->submitTracking($value->toArray());
             if (!$tracking) {
                 continue;
             }
