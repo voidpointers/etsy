@@ -37,9 +37,10 @@ class Tracking extends Command
 
         // 发送
         foreach ($logistics as $value) {
-            $tracking = $this->receiptRequest->submitTracking($value->toArray());
-            if (!$tracking) {
-                echo '包裹 ' . $value->package_sn . " 已推送过" . PHP_EOL;
+            try {
+                $tracking = $this->receiptRequest->submitTracking($value->toArray());
+            } catch (\Exception $e) {
+                echo '包裹 ' . $value->package_sn . $e->getMessage() . PHP_EOL;
                 continue;
             }
 
