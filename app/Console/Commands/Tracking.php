@@ -40,6 +40,9 @@ class Tracking extends Command
             try {
                 $tracking = $this->receiptRequest->submitTracking($value->toArray());
             } catch (\Exception $e) {
+                Logistics::where(['package_sn' => $value->packages->package_sn])->update([
+                    'status' => 8
+                ]);
                 echo '包裹 ' . $value->package_sn . $e->getMessage() . PHP_EOL;
                 continue;
             }
