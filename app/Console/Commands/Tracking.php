@@ -38,6 +38,9 @@ class Tracking extends Command
         // 发送
         foreach ($logistics as $value) {
             $tracking = $this->receiptRequest->submitTracking($value);
+            if (!$tracking) {
+                continue;
+            }
 
             $shipments = $tracking['results'][0]['shipments'][0];
             Logistics::where(['package_sn' => $value->packages->package_sn])->update([
