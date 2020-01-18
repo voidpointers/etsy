@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\Country;
+use App\Console\Commands\ReceiptCopy;
+use App\Console\Commands\Tracking;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +18,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\ReceiptPull::class,
         Country::class,
+        ReceiptCopy::class,
+        Tracking::class
     ];
 
     /**

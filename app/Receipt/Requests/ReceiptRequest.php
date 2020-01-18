@@ -51,4 +51,19 @@ class ReceiptRequest
         ]);
         return $receipts;
     }
+
+    public function submitTracking(array $params = [])
+    {
+        return \Etsy::submitTracking([
+            'params' => [
+                'shop_id' => 16407439,
+                'receipt_id' => $params['packages']['receipt_id'],
+            ],
+            'data' => [
+                'tracking_code' => $params['tracking_code'],
+                'carrier_name' => 'usps',
+                'send_bcc' => false
+            ]
+        ]);
+    }
 }
