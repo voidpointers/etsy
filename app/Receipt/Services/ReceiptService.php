@@ -64,6 +64,8 @@ class ReceiptService
             if (in_array($id, $tmp)) {
                 echo '订单已存在 ' . $id . PHP_EOL;
                 unset($receipts[$id]);
+            } else {
+                echo "订单拉取成功 $id". PHP_EOL;
             }
         }
 
