@@ -14,7 +14,7 @@ class TransactionTransformer implements TransformerInterface
                 'title' => $value['title'],
                 'receipt_id' => $receipts['receipt_id'],
                 'receipt_sn' => $receipts['receipt_sn'],
-                'transaction_id' => $value['transaction_id'],
+                'transaction_sn' => $value['transaction_id'],
                 'listing_id' => $value['listing_id'],
                 'etsy_sku' => $value['product_data']['sku'],
                 'image' => $value['MainImage']['url_75x75'],
