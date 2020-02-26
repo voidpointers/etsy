@@ -33,7 +33,8 @@
             "Inventory\\": "app/Inventory",
             "Listing\\": "app/Listing",
             "System\\": "app/System",
-            "Package\\": "app/Package"
+            "Package\\": "app/Package",
+            "Shop\\": "app/Shop"
         },
         "files": [
             "bootstrap/helpers.php"

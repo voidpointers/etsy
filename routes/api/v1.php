@@ -8,6 +8,8 @@ $api->version('v1', [], function ($api) {
     ], function ($api) {
         $api->get('receipts/pull', 'ReceiptsController@pull');
         $api->get('listings/pull', 'ListingsController@pull');
+        $api->get('shop/{shop_id}', 'ShopsController@index');
+        $api->post('shop/{shop_id}', 'ShopsController@update');
         $api->post('trackings/create', 'TrackingsController@create');
     });
 });
