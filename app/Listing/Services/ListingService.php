@@ -2,31 +2,27 @@
 
 namespace Listing\Services;
 
+use Listing\Requests\ListingRequest;
+
 class ListingService
 {
     protected $transformer;
 
-    protected $receiptRequest;
+    protected $listingRequest;
 
-    public function __construct(ReceiptRequest $receiptRequest)
+    public function __construct(ListingRequest $listingRequest)
     {
-        $this->receiptRequest = $receiptRequest;
+        $this->listingRequest = $listingRequest;
     }
 
     /**
      * 获取收据列表
-     * 
+     *
      * @param array $params
      */
     public function lists($params = [])
     {
-        // 格式化
-        $receipts = $this->formation(
-            $this->receiptRequest->getReceiptByShop($params)
-        );
-
-        // 转换
-        $data = $this->transform($receipts);
+        $data = $this->listingRequest->getListingByShop($params);
 
         return $data;
     }
