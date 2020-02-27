@@ -26,8 +26,9 @@ class ListingsController extends Controller
      *
      * @return
      */
-    public function index(Request $request)
+    public function index($shop_id, Request $request)
     {
+        $request->offsetSet('shop_id', $shop_id);
         $data = $this->listingService->lists($request->all());
         return $this->response->array($data);
     }

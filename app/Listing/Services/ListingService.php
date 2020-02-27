@@ -23,7 +23,6 @@ class ListingService
     public function lists($params = [])
     {
         $data = $this->listingRequest->getListingByShop($params);
-
         return $data;
     }
 }
