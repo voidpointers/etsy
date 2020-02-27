@@ -26,7 +26,7 @@ class ListingsController extends Controller
      *
      * @return
      */
-    public function pull(Request $request)
+    public function show(Request $request)
     {
         $data = $this->listingService->lists($request->all());
         return $this->response->array($data);
