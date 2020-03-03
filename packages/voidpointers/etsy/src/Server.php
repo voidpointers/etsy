@@ -23,7 +23,7 @@ class Server
             'callback_uri' => ''
         ]);
 
-        if (empty($config['access_token']) || empty($config['access_token_secret'])) {
+        if (!empty($config['access_token']) && !empty($config['access_token_secret'])) {
             $tokenCredentials = new TokenCredentials();
             $tokenCredentials->setIdentifier($config['access_token']);
             $tokenCredentials->setSecret($config['access_token_secret']);
