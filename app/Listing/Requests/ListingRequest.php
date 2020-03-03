@@ -33,7 +33,8 @@ class ListingRequest
 
         $associations = [
             'MainImage',
-            'Inventory',
+            // 'Inventory',
+            'Variations',
             'Images'
         ];
 
