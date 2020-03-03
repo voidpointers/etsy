@@ -32,7 +32,9 @@ class ListingRequest
         }
 
         $associations = [
-            'MainImage' => ['associations' => ['MainImage']]
+            'MainImage',
+            'Inventory',
+            'Images'
         ];
 
         $listings = \Etsy::findAllShopListingsActive([
