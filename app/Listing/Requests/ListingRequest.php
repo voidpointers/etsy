@@ -32,7 +32,7 @@ class ListingRequest
         }
 
         $associations = [
-            'MainImage',
+            'ListingImage',
             'Inventory',
             'Images'
         ];
