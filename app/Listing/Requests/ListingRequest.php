@@ -37,7 +37,8 @@ class ListingRequest
             'Images'
         ];
 
-        $listings = \Etsy::findAllShopListingsActive([
+        $method = 'findAllShopListingsExpired';
+        $listings = \Etsy::$method([
             'params' => $filter,
             'associations' => $associations
         ]);
