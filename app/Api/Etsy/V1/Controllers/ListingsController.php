@@ -32,4 +32,9 @@ class ListingsController extends Controller
         $data = $this->listingService->lists($request->all());
         return $this->response->array($data);
     }
+
+    public function update()
+    {
+
+    }
 }
