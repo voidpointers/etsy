@@ -20,9 +20,9 @@ class AuthController extends Controller
             $request->get('oauth_verifier')
         );
 
-        Shop::create([
-            'auth_token' => $_GET['oauth_token'],
-            'auth_secret' => $_COOKIE['request_secret'],
-        ]);
+        return [
+            'access_token' => $credentials->getIdentifier(),
+            'access_token_secret' => $credentials->getSecret(),
+        ]; 
     }
 }
