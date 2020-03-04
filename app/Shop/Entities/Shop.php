@@ -20,10 +20,12 @@ class Shop extends Model
     {
         $data = [];
         foreach ($params as $param) {
+            dump($param);
             $param['image'] = $param['image_url_760x100'];
             $param['username'] = $param['login_name'];
             $param['icon'] = $param['icon_url_fullxfull'];
             foreach ($this->fillable as $item) {
+                dump($param[$item]);
                 $data[] = [
                     $item => $param[$item] ?? ''
                 ];
