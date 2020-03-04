@@ -32,10 +32,8 @@ class ListingRequest
         }
 
         $associations = [
-            'MainImage',
-            // 'Inventory',
-            // 'Variations',
-            'Images'
+            'Images',
+            'Inventory',
         ];
 
         $method = 'findAllShopListingsActive';
