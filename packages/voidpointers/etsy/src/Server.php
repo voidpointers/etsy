@@ -7,9 +7,6 @@ use League\OAuth1\Client\Credentials\TokenCredentials;
 use Illuminate\Session\SessionManager;
 use Illuminate\Session\Store;
 
-/**
- * Class EtsyService
- */
 class Server
 {
     /** @var Etsy $server */
