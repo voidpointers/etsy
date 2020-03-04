@@ -8,7 +8,7 @@ use Shop\Entities\Shop;
 
 class AuthController extends Controller
 {
-    public function redirect($provider)
+    public function redirect()
     {
         return \Etsy::authorize(env('ETSY_REDIRECT_URI'));
     }
