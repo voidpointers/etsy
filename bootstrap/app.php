@@ -22,13 +22,15 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades(true, [
-    Voidpointers\Etsy\Facades\Etsy::class => 'Etsy'
+    Voidpointers\Etsy\Facades\Etsy::class => 'Etsy',
+    Illuminate\Session\SessionManager::class => 'session',
 ]);
 
 $app->withEloquent();
 
 $app->configure('etsy');
 $app->configure('database');
+$app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
