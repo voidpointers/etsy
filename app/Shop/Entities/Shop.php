@@ -9,4 +9,27 @@ class Shop extends Model
     protected $connection = 'system-db';
 
     protected $table = 'shops';
+
+    protected $fillable = [
+        'user_id', 'username', 'shop_id', 'shop_name', 'title', 'currency_code',
+        'shop_name_zh', 'url', 'image', 'icon', 'consumer_key', 'consumer_secret',
+        'access_token', 'access_secret', 'status'
+    ];
+
+    public function store(array $params)
+    {
+        $data = [];
+        foreach ($params as $param) {
+            $param['image'] = $param['image_url_760x100'];
+            $param['username'] = $param['login_name'];
+            $param['icon'] = $param['icon_url_fullxfull'];
+            foreach ($this->fillable as $item) {
+                $data[] = [
+                    $item => $param[$item] ?? ''
+                ];
+            }
+        }
+        dd($data);
+        return self::insert($data);
+    }
 }
