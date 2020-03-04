@@ -3,6 +3,7 @@
 namespace Voidpointers\Etsy;
 
 use Gentor\OAuth1Etsy\Client\Server\Etsy;
+use Illuminate\Support\Facades\Cache;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 
 class Server
@@ -48,7 +49,7 @@ class Server
         $temporaryCredentials = $this->server->getTemporaryCredentials();
 
         // Store credentials in the session, we'll need them later
-        app('session')->put('temporary_credentials', serialize($temporaryCredentials));
+        Cache::put('temporary_credentials', serialize($temporaryCredentials), 3600);
 
         return $this->server->getAuthorizationUrl($temporaryCredentials);
     }
@@ -61,7 +62,7 @@ class Server
     public function approve($token, $verifier)
     {
         // Retrieve the temporary credentials we saved before
-        $temporaryCredentials = unserialize(app('session')->get('temporary_credentials'));
+        $temporaryCredentials = unserialize(Cache::get('temporary_credentials'));
 
         return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
     }
