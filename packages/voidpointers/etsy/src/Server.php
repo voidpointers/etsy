@@ -10,7 +10,7 @@ use Illuminate\Session\Store;
 /**
  * Class EtsyService
  */
-class EtsyService
+class Server
 {
     /** @var Etsy $server */
     private $server;
