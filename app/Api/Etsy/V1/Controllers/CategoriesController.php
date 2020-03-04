@@ -8,8 +8,10 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $top = \Etsy::findAllTopCategory();
-
-        return $top;
+        return [
+            'top' => \Etsy::findAllTopCategory(),
+            'sub' => \Etsy::findAllTopCategoryChildren(),
+            'third' => \Etsy::findAllSubCategoryChildren()
+        ];
     }
 }
