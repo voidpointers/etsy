@@ -3,6 +3,7 @@
 namespace Voidpointers\Etsy;
 
 use Gentor\OAuth1Etsy\Client\Server\Etsy;
+use Illuminate\Session\SessionManager;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 
 class Server
@@ -11,9 +12,9 @@ class Server
 
     protected $tokenCredentials;
 
-    public function __construct()
+    public function __construct(SessionManager $session)
     {
-        $this->session = app('session');
+        $this->session = $session;
 
         $config = config('etsy');
         $this->server = new Etsy([
