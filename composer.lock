@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61305e93f541005f895c73a1b2c57de6",
+    "content-hash": "5102bbf305b055e6380499c0821a5fff",
     "packages": [
         {
             "name": "dingo/api",
@@ -1855,16 +1855,16 @@
         },
         {
             "name": "illuminate/session",
-            "version": "v5.8.36",
+            "version": "v5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/session.git",
-                "reference": "087d360f7b9d75bc964280b890c2f2fe8efaf71f"
+                "reference": "15b4d36cb3f1c6c757a81e9acc593b98acb905ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/session/zipball/087d360f7b9d75bc964280b890c2f2fe8efaf71f",
-                "reference": "087d360f7b9d75bc964280b890c2f2fe8efaf71f",
+                "url": "https://api.github.com/repos/illuminate/session/zipball/15b4d36cb3f1c6c757a81e9acc593b98acb905ab",
+                "reference": "15b4d36cb3f1c6c757a81e9acc593b98acb905ab",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1908,7 +1908,7 @@
             ],
             "description": "The Illuminate Session package.",
             "homepage": "https://laravel.com",
-            "time": "2019-07-08T13:48:55+00:00"
+            "time": "2019-02-18T18:37:54+00:00"
         },
         {
             "name": "illuminate/support",

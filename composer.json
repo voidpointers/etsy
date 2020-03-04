@@ -9,6 +9,7 @@
         "dingo/api": "^2.4",
         "gentor/oauth1-etsy": "^1.0",
         "illuminate/redis": "^5.8",
+        "illuminate/session": "5.8",
         "inakiabt/etsy-php": "^0.12.1",
         "laravel/lumen-framework": "5.8.*",
         "predis/predis": "^1.1",
