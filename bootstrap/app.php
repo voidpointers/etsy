@@ -30,7 +30,7 @@ $app->withEloquent();
 
 $app->configure('etsy');
 $app->configure('database');
-$app->configure('session');
+// $app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ $app->singleton(
 */
 
 $app->middleware([
-    Illuminate\Session\Middleware\StartSession::class
+    // Illuminate\Session\Middleware\StartSession::class
 ]);
 
 // $app->routeMiddleware([
@@ -90,7 +90,7 @@ $app->bind(Illuminate\Session\SessionManager::class, function ($app) {
 // $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Illuminate\Session\SessionServiceProvider::class);
+// $app->register(Illuminate\Session\SessionServiceProvider::class);
 $app->register(\Voidpointers\Etsy\Provider\LumenServiceProvider::class);
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
