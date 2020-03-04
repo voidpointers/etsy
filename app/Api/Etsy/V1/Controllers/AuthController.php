@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function redirect()
     {
-        return \Etsy::authorize(env('ETSY_REDIRECT_URI'));
+        return redirect(\Etsy::authorize(env('ETSY_REDIRECT_URI')));
     }
 
     public function approve(Request $request)
