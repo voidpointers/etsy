@@ -31,7 +31,7 @@ class AuthController extends Controller
                 'user_id' => $user->uid
             ]
         ]);
-        Shop::store($shop);
+        (new Shop)->store($shop);
         return $shop;
     }
 }
