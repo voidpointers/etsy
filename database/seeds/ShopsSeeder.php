@@ -14,9 +14,10 @@ class ShopsSeeder extends Seeder
     {
         $data = [
             [
-                'user_id' => '',
-                'username' => '',
+                'user_id' => 125136382,
+                'username' => '86zsocy7',
                 'shop_id' => 16333181,
+                'shop_name' => '',
                 'access_token' => '76fd62c2c980ecd90b4af0baaf8fee',
                 'access_secret' => 'd5cf360a96'
             ]

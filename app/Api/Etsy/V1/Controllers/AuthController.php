@@ -25,6 +25,12 @@ class AuthController extends Controller
 
     public function user()
     {
-        return \Etsy::getUserDetails();
+        $user = \Etsy::getUserDetails();
+        $shop = \Etsy::findAllUserShops([
+            'params' => [
+                'user_id' => $user->uid
+            ]
+        ]);
+        return $shop;
     }
 }
