@@ -4,8 +4,6 @@ namespace Voidpointers\Etsy;
 
 use Gentor\OAuth1Etsy\Client\Server\Etsy;
 use League\OAuth1\Client\Credentials\TokenCredentials;
-use Illuminate\Session\SessionManager;
-use Illuminate\Session\Store;
 
 class Server
 {
@@ -15,18 +13,13 @@ class Server
     /** @var TokenCredentials $tokenCredentials */
     private $tokenCredentials;
 
-    /** @var Store */
-    private $session;
-
     /**
      * EtsyService constructor.
-     * @param SessionManager $session
+     * 
      * @param array $config
      */
-    public function __construct(SessionManager $session, array $config)
+    public function __construct(array $config)
     {
-        $this->session = $session;
-
         $this->server = new Etsy([
             'identifier' => $config['consumer_key'],
             'secret' => $config['consumer_secret'],
@@ -55,7 +48,7 @@ class Server
         $temporaryCredentials = $this->server->getTemporaryCredentials();
 
         // Store credentials in the session, we'll need them later
-        $this->session->put('temporary_credentials', serialize($temporaryCredentials));
+        app('session')->put('temporary_credentials', serialize($temporaryCredentials));
 
         return $this->server->getAuthorizationUrl($temporaryCredentials);
     }
@@ -68,7 +61,7 @@ class Server
     public function approve($token, $verifier)
     {
         // Retrieve the temporary credentials we saved before
-        $temporaryCredentials = unserialize($this->session->get('temporary_credentials'));
+        $temporaryCredentials = unserialize(app('session')->get('temporary_credentials'));
 
         return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
     }
