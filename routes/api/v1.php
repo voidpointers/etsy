@@ -20,5 +20,6 @@ $api->version('v1', [], function ($api) {
     ], function ($api) {
         $api->get('auth/redirect', 'AuthController@redirect');
         $api->get('auth/approve', 'AuthController@approve');
+        $api->get('auth/user', 'AuthController@user');
     });
 });

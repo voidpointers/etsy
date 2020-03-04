@@ -22,4 +22,9 @@ class AuthController extends Controller
             'access_token_secret' => $credentials->getSecret(),
         ]; 
     }
+
+    public function user()
+    {
+        return \Etsy::getUserDetails();
+    }
 }
