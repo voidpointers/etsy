@@ -16,7 +16,7 @@ class Shop extends Model
         'access_token', 'access_secret', 'status'
     ];
 
-    public function store(array $params)
+    public function store($params)
     {
         $data = [];
         foreach ($params as $param) {
