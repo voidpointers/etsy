@@ -11,6 +11,7 @@ $api->version('v1', [], function ($api) {
         $api->get('shop/{shop_id}', 'ShopsController@index');
         $api->post('shop/{shop_id}', 'ShopsController@update');
         $api->post('trackings/create', 'TrackingsController@create');
+        $api->get('category', 'CategoryController@index');
     });
     $api->group([
         'namespace' => 'Api\Etsy\V1\Controllers',

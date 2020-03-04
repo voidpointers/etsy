@@ -34,7 +34,8 @@
             "Listing\\": "app/Listing",
             "System\\": "app/System",
             "Package\\": "app/Package",
-            "Shop\\": "app/Shop"
+            "Shop\\": "app/Shop",
+            "Category\\": "app/Category"
         },
         "files": [
             "bootstrap/helpers.php"
