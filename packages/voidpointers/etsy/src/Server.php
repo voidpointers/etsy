@@ -12,11 +12,10 @@ class Server
 
     protected $tokenCredentials;
 
-    public function __construct(SessionManager $session)
+    public function __construct(SessionManager $session, array $config)
     {
         $this->session = $session;
 
-        $config = config('etsy');
         $this->server = new Etsy([
             'identifier' => $config['consumer_key'],
             'secret' => $config['consumer_secret'],
