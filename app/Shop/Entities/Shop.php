@@ -24,9 +24,7 @@ class Shop extends Model
             $param['username'] = $param['login_name'];
             $param['icon'] = $param['icon_url_fullxfull'];
             foreach ($this->fillable as $item) {
-                $data[$key] = [
-                    $item => $param[$item] ?? ''
-                ];
+                $data[$key][$item] = $param[$item] ?? '';
             }
         }
         dd($data);
