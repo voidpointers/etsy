@@ -4,7 +4,8 @@
     "require": {
         "guzzlehttp/guzzle": "^6.5",
         "league/oauth1-client": "^1.7",
-        "gentor/oauth1-etsy": "^1.0"
+        "gentor/oauth1-etsy": "^1.0",
+        "illuminate/session": "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
