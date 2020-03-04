@@ -3,15 +3,29 @@
 namespace Voidpointers\Etsy;
 
 use Gentor\OAuth1Etsy\Client\Server\Etsy;
-use Illuminate\Session\SessionManager;
 use League\OAuth1\Client\Credentials\TokenCredentials;
+use Illuminate\Session\SessionManager;
+use Illuminate\Session\Store;
 
-class Server
+/**
+ * Class EtsyService
+ */
+class EtsyService
 {
-    protected $server;
+    /** @var Etsy $server */
+    private $server;
 
-    protected $tokenCredentials;
+    /** @var TokenCredentials $tokenCredentials */
+    private $tokenCredentials;
 
+    /** @var Store */
+    private $session;
+
+    /**
+     * EtsyService constructor.
+     * @param SessionManager $session
+     * @param array $config
+     */
     public function __construct(SessionManager $session, array $config)
     {
         $this->session = $session;
@@ -19,7 +33,7 @@ class Server
         $this->server = new Etsy([
             'identifier' => $config['consumer_key'],
             'secret' => $config['consumer_secret'],
-            'scope' => $config['scope'],
+            'scope' => !empty($config['scope']) ? $config['scope'] : '',
             'callback_uri' => ''
         ]);
 
@@ -27,6 +41,7 @@ class Server
             $tokenCredentials = new TokenCredentials();
             $tokenCredentials->setIdentifier($config['access_token']);
             $tokenCredentials->setSecret($config['access_token_secret']);
+
             $this->tokenCredentials = $tokenCredentials;
         }
     }
@@ -38,10 +53,13 @@ class Server
     public function authorize($callbackUri)
     {
         $this->server->getClientCredentials()->setCallbackUri($callbackUri);
+
         // Retrieve temporary credentials
         $temporaryCredentials = $this->server->getTemporaryCredentials();
+
         // Store credentials in the session, we'll need them later
         $this->session->put('temporary_credentials', serialize($temporaryCredentials));
+
         return $this->server->getAuthorizationUrl($temporaryCredentials);
     }
 
@@ -54,6 +72,7 @@ class Server
     {
         // Retrieve the temporary credentials we saved before
         $temporaryCredentials = unserialize($this->session->get('temporary_credentials'));
+
         return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
     }
 
@@ -67,6 +86,7 @@ class Server
     public function getUserUid($force = false)
     {
         $userDetails = $this->getUserDetails($force);
+
         return $userDetails->uid;
     }
 
@@ -90,6 +110,7 @@ class Server
     public function __call($method, array $args)
     {
         $api = new Request($this->server, $this->tokenCredentials);
+
         return call_user_func_array([$api, $method], $args);
     }
 }
