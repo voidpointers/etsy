@@ -14,6 +14,7 @@ $api->version('v1', [], function ($api) {
         $api->get('category/top', 'CategoriesController@index');
         $api->get('category/sub', 'CategoriesController@sub');
         $api->get('category/3rd', 'CategoriesController@third');
+        $api->get('category/taxonomy', 'CategoriesController@taxonomy');
     });
     $api->group([
         'namespace' => 'Api\Etsy\V1\Controllers',

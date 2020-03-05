@@ -28,4 +28,9 @@ class CategoriesController extends Controller
             ]
         ]);
     }
+
+    public function taxonomy()
+    {
+        return \Etsy::getSellerTaxonomy();
+    }
 }
