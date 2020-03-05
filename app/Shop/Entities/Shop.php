@@ -26,8 +26,8 @@ class Shop extends Model
             $param['status'] = 1;
             foreach ($this->fillable as $item) {
                 $data[$key][$item] = $param[$item] ?? '';
-                $data[$key]['access_token'] = $credentials->getIdentifier();
-                $data[$key]['access_secret'] = $credentials->getSecret();
+                $data[$key]['access_token'] = $credentials['access_token'];
+                $data[$key]['access_secret'] = $credentials['access_secret'];
             }
         }
         return self::insert($data);
