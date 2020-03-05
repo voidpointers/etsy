@@ -16,18 +16,20 @@ class Shop extends Model
         'access_token', 'access_secret', 'status'
     ];
 
-    public function store($params)
+    public function store($params, $credentials)
     {
         $data = [];
         foreach ($params as $key => $param) {
             $param['image'] = $param['image_url_760x100'];
             $param['username'] = $param['login_name'];
             $param['icon'] = $param['icon_url_fullxfull'];
+            $param['status'] = 1;
             foreach ($this->fillable as $item) {
                 $data[$key][$item] = $param[$item] ?? '';
+                $data[$key]['access_token'] = $credentials->getIdentifier();
+                $data[$key]['access_secret'] = $credentials->getSecret();
             }
         }
-        dd($data);
         return self::insert($data);
     }
 }

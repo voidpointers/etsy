@@ -17,12 +17,10 @@ class AuthController extends Controller
     {
         $credentials = \Etsy::approve($request->get('oauth_token'), $request->get('oauth_verifier'));
 
-        return [
-            'access_token' => $credentials->getIdentifier(),
-            'access_token_secret' => $credentials->getSecret(),
-        ]; 
+        return $this->user($credentials);
     }
 
+    // public function user(array $credentials)
     public function user()
     {
         $user = \Etsy::getUserDetails();
@@ -31,7 +29,11 @@ class AuthController extends Controller
                 'user_id' => $user->uid
             ]
         ]);
-        (new Shop)->store($shop['results']);
+        $credentials = [
+            'access_secret' => 'd5cf360a96',
+            'access_token' => '76fd62c2c980ecd90b4af0baaf8fee',
+        ];
+        (new Shop)->store($shop['results'], $credentials);
         return $shop;
     }
 }
