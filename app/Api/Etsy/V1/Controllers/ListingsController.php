@@ -33,8 +33,14 @@ class ListingsController extends Controller
         return $this->response->array($data);
     }
 
-    public function update()
+    public function inventory($listing_id)
     {
+        $data = \Etsy::getInventory([
+            'param' => [
+                'listing_id' => $listing_id
+            ]
+        ]);
 
+        return $this->response->array($data);
     }
 }
