@@ -36,7 +36,7 @@ class ListingsController extends Controller
     public function inventory($listing_id)
     {
         $data = \Etsy::getInventory([
-            'param' => [
+            'params' => [
                 'listing_id' => $listing_id
             ]
         ]);
