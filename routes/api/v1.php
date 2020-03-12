@@ -17,6 +17,7 @@ $api->version('v1', [], function ($api) {
         $api->get('category/3rd', 'CategoriesController@third');
         $api->get('category/taxonomy', 'CategoriesController@taxonomy');
         $api->get('property/{listing_id}', 'PropertiesController@index');
+        $api->get('user/{user_id}', 'UsersController@show');
     });
     $api->group([
         'namespace' => 'Api\Etsy\V1\Controllers',
