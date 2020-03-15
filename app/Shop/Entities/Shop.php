@@ -31,7 +31,7 @@ class Shop extends Model
             }
         }
         return self::updateOrCreate(
-            ['shop_id' => $data['shop_id']],
+            ['shop_id' => $params['shop_id']],
             $data
         );
     }
