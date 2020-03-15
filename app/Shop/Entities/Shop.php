@@ -18,7 +18,6 @@ class Shop extends Model
 
     public function store($params, $credentials)
     {
-        dd($credentials, $credentials->identifier);
         $data = [];
         foreach ($params as $key => $param) {
             $param['image'] = $param['image_url_760x100'];
@@ -27,8 +26,8 @@ class Shop extends Model
             $param['status'] = 1;
             foreach ($this->fillable as $item) {
                 $data[$key][$item] = $param[$item] ?? '';
-                $data[$key]['access_token'] = $credentials->identifier;
-                $data[$key]['access_secret'] = $credentials->secret;
+                $data[$key]['access_token'] = $credentials->getIdentifier();
+                $data[$key]['access_secret'] = $credentials->getSecret();
             }
         }
         return self::updateOrCreate(
