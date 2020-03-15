@@ -29,7 +29,7 @@ class AuthController extends Controller
                 'user_id' => $user->uid
             ]
         ]);
-        dump($shop, $credentials);
+        return [$shop, $credentials];
         // $credentials = [
         //     'access_secret' => 'd5cf360a96',
         //     'access_token' => '76fd62c2c980ecd90b4af0baaf8fee',
