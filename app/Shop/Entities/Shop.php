@@ -19,20 +19,22 @@ class Shop extends Model
     public function store($params, $credentials)
     {
         $data = [];
-        foreach ($params as $key => $param) {
+        foreach ($params as $param) {
             $param['image'] = $param['image_url_760x100'];
             $param['username'] = $param['login_name'];
             $param['icon'] = $param['icon_url_fullxfull'];
             $param['status'] = 1;
             foreach ($this->fillable as $item) {
-                $data[$key][$item] = $param[$item] ?? '';
-                $data[$key]['access_token'] = $credentials->getIdentifier();
-                $data[$key]['access_secret'] = $credentials->getSecret();
+                $data[$item] = $param[$item] ?? '';
+                $data['access_token'] = $credentials->getIdentifier();
+                $data['access_secret'] = $credentials->getSecret();
             }
+            self::updateOrCreate(
+                ['shop_id' => $param['shop_id']],
+                $data
+            );
         }
-        return self::updateOrCreate(
-            ['shop_id' => $params['shop_id']],
-            $data
-        );
+
+        return $data;
     }
 }
