@@ -11,14 +11,13 @@ class Shop extends Model
     protected $table = 'shops';
 
     protected $fillable = [
-        'user_id', 'username', 'shop_id', 'shop_name', 'title', 'currency_code',
+        'user_id', 'username', 'shop_name', 'title', 'currency_code',
         'shop_name_zh', 'url', 'image', 'icon', 'consumer_key', 'consumer_secret',
         'access_token', 'access_secret', 'status'
     ];
 
     public function store($params, $credentials)
     {
-        dd($params, $credentials);
         $data = [];
         foreach ($params as $key => $param) {
             $param['image'] = $param['image_url_760x100'];
@@ -27,10 +26,13 @@ class Shop extends Model
             $param['status'] = 1;
             foreach ($this->fillable as $item) {
                 $data[$key][$item] = $param[$item] ?? '';
-                $data[$key]['access_token'] = $credentials['access_token'];
-                $data[$key]['access_secret'] = $credentials['access_secret'];
+                $data[$key]['access_token'] = $credentials->identifier;
+                $data[$key]['access_secret'] = $credentials->secret;
             }
         }
-        return self::insert($data);
+        return self::updateOrCreate(
+            ['shop_id' => $data['shop_id']],
+            $data
+        );
     }
 }
