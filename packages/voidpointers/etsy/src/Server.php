@@ -64,7 +64,8 @@ class Server
         // Retrieve the temporary credentials we saved before
         $temporaryCredentials = unserialize(Cache::store('file')->get('temporary_credentials'));
 
-        return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
+        $this->tokenCredentials = $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
+        return $this->tokenCredentials;
     }
 
     /**
