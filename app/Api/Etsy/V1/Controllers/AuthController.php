@@ -16,7 +16,6 @@ class AuthController extends Controller
     public function approve(Request $request)
     {
         $credentials = \Etsy::approve($request->get('oauth_token'), $request->get('oauth_verifier'));
-        print_r($credentials);
 
         return $this->user($credentials);
     }
