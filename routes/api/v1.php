@@ -9,6 +9,7 @@ $api->version('v1', [], function ($api) {
         $api->get('receipts/pull', 'ReceiptsController@pull');
         $api->get('listings', 'ListingsController@all');
         $api->get('listings/{shop_id}', 'ListingsController@index');
+        $api->post('listings/{shop_id}', 'ListingsController@create');
         $api->get('inventory/{listing_id}', 'ListingsController@inventory');
         $api->get('shop/{shop_id}', 'ShopsController@index');
         $api->post('shop/{shop_id}', 'ShopsController@update');

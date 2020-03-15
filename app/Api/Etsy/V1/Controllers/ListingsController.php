@@ -50,4 +50,9 @@ class ListingsController extends Controller
             'params' => $request->all()
         ]);
     }
+
+    public function create()
+    {
+
+    }
 }

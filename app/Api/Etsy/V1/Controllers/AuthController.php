@@ -20,8 +20,8 @@ class AuthController extends Controller
         return $this->user($credentials);
     }
 
-    // public function user(array $credentials)
-    public function user()
+    public function user(array $credentials)
+    // public function user()
     {
         $user = \Etsy::getUserDetails();
         $shop = \Etsy::findAllUserShops([
@@ -29,10 +29,10 @@ class AuthController extends Controller
                 'user_id' => $user->uid
             ]
         ]);
-        $credentials = [
-            'access_secret' => 'd5cf360a96',
-            'access_token' => '76fd62c2c980ecd90b4af0baaf8fee',
-        ];
+        // $credentials = [
+        //     'access_secret' => 'd5cf360a96',
+        //     'access_token' => '76fd62c2c980ecd90b4af0baaf8fee',
+        // ];
         (new Shop)->store($shop['results'], $credentials);
         return $shop;
     }
