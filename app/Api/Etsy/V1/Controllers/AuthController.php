@@ -20,7 +20,7 @@ class AuthController extends Controller
         return $this->store($credentials);
     }
 
-    public function store(array $credentials)
+    public function store($credentials)
     // public function user()
     {
         $user = \Etsy::getUserDetails();
