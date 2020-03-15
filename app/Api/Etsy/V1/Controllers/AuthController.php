@@ -17,10 +17,10 @@ class AuthController extends Controller
     {
         $credentials = \Etsy::approve($request->get('oauth_token'), $request->get('oauth_verifier'));
 
-        return $this->user($credentials);
+        return $this->store($credentials);
     }
 
-    public function user(array $credentials)
+    public function store(array $credentials)
     // public function user()
     {
         $user = \Etsy::getUserDetails();
