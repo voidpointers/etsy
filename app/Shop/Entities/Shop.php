@@ -18,7 +18,7 @@ class Shop extends Model
 
     public function store($params, $credentials)
     {
-        dd($credentials);
+        dd($credentials, $credentials->identifier);
         $data = [];
         foreach ($params as $key => $param) {
             $param['image'] = $param['image_url_760x100'];
