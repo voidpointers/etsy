@@ -49,7 +49,7 @@ class Server
         $temporaryCredentials = $this->server->getTemporaryCredentials();
 
         // Store credentials in the session, we'll need them later
-        Cache::put('temporary_credentials', serialize($temporaryCredentials), 3600);
+        Cache::store('file')->put('temporary_credentials', serialize($temporaryCredentials), 3600);
 
         return $this->server->getAuthorizationUrl($temporaryCredentials);
     }
@@ -62,7 +62,7 @@ class Server
     public function approve($token, $verifier)
     {
         // Retrieve the temporary credentials we saved before
-        $temporaryCredentials = unserialize(Cache::get('temporary_credentials'));
+        $temporaryCredentials = unserialize(Cache::store('file')->get('temporary_credentials'));
 
         return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
     }
