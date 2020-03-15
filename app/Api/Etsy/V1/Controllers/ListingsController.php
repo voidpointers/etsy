@@ -43,4 +43,11 @@ class ListingsController extends Controller
 
         return $this->response->array($data);
     }
+
+    public function all(Request $request)
+    {
+        return \Etsy::findAllListingActive([
+            'params' => $request->all()
+        ]);
+    }
 }
